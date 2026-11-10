@@ -1,0 +1,36 @@
+{
+    "model": "XGBoostClassifier",
+    "target": "diabetes",
+    "features": {
+        "numerical": [
+            "bmi",
+            "age",
+            "blood_glucose_level",
+            "HbA1c_level"
+        ],
+        "categorical": [
+            "gender",
+            "hypertension",
+            "heart_disease",
+            "smoking_history"
+        ]
+    },
+    "dataset": {
+        "filename": "diabetes_prediction_dataset_cleaned.csv",
+        "sha256": "6cac5019855c46d2f3b0e5121ae8c754d9715708266269b76b60dfe8400945a4",
+        "rows": 96128
+    },
+    "split": {
+        "train": 57676,
+        "validation": 19226,
+        "test": 19226
+    },
+    "test_metrics": {
+        "accuracy": 0.9720170602309373,
+        "precision": 0.9931856899488927,
+        "recall": 0.6875,
+        "f1_score": 0.8125435540069686,
+        "roc_auc": 0.9763179226447385
+    },
+    "random_state": 42
+}
