@@ -1,20 +1,17 @@
-import json
 from pathlib import Path
-
 import joblib
-import pandas as pd
 
 
-MODEL_PATH = Path(__file__).parent / "data" / "pipeline.joblib"
+MODEL_PATH = Path(__file__).parent / "models" / "pipeline.joblib"
 PACIENT = {
-    "gender": "Female",
-    "age": 50,
-    "hypertension": 0,
+    "gender": "Male",
+    "age": 68,
+    "hypertension": 1,
     "heart_disease": 0,
     "smoking_history": "never",
-    "bmi": 28.5,
-    "HbA1c_level": 6.2,
-    "blood_glucose_level": 140
+    "bmi": 31.5,
+    "HbA1c_level": 6.0,
+    "blood_glucose_level": 201
 }
 
 with MODEL_PATH.open("rb") as model_file:
