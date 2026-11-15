@@ -10,7 +10,8 @@ from sklearn.metrics import (
     precision_score,
     recall_score,
     f1_score,
-    roc_auc_score
+    roc_auc_score,
+    confusion_matrix
 )
 
 from model import (
@@ -23,7 +24,7 @@ from model import (
 )
 
 #Rutas del proyecto
-DATA_PATH = Path("data/diabetes_prediction_dataset_cleaned.csv")
+DATA_PATH = Path("data/diabetes_prediction_dataset_cleaned_v2.csv")
 MODEL_PATH = Path("models/pipeline.joblib")
 METADATA_PATH = Path("models/model_metadata.json")
 
@@ -50,7 +51,8 @@ def evaluate_model(pipeline, df):
         'precision': float(precision_score(y, y_pred, zero_division=0)),
         'recall': float(recall_score(y, y_pred, zero_division=0)),
         'f1_score': float(f1_score(y, y_pred, zero_division=0)),
-        'roc_auc': float(roc_auc_score(y, y_prob))
+        'roc_auc': float(roc_auc_score(y, y_prob)),
+        'confusion_matrix': confusion_matrix(y, y_pred).tolist()
     }
 
     return metrics
@@ -91,11 +93,11 @@ def main():
     pipeline = train_model(df_train)
 
     # 5. Evaluar con validación
-    print("\nEvaluación en test:")
+    print("\nEvaluación con validacion:")
 
-    test_metrics = evaluate_model(pipeline, df_test)
+    val_metrics = evaluate_model(pipeline, df_val)
 
-    print(json.dumps(test_metrics, indent=4))
+    print(json.dumps(val_metrics, indent=4))
 
     # 8. Guardar modelo
     MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -104,7 +106,7 @@ def main():
     
     # 9. Guardar metadatos
     metadata = {
-        "model": "XGBoostClassifier",
+        "model": "RandomForestClassifier",
         "target": TARGET,
         "features": {
             "numerical": list(NUMERICAL_FEATURES),
@@ -120,7 +122,7 @@ def main():
             "validation": len(df_val),
             "test": len(df_test),
         },
-        "test_metrics": test_metrics,
+        "val_metrics": val_metrics,
         "random_state": 42,
     }
     

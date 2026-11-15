@@ -1,18 +1,10 @@
 from __future__ import annotations
 
-import argparse
-import csv
-import hashlib
-import json
-import pickle
-from pathlib import Path
-from typing import Any
-
 from sklearn.feature_extraction import DictVectorizer
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import train_test_split
-from xgboost import XGBClassifier 
+
 
 CATEGORICAL_FEATURES = (
     "gender",
@@ -49,12 +41,11 @@ def prepare_features(df):
 def build_pipeline():
     return make_pipeline(
         DictVectorizer(),
-        XGBClassifier(
-            objective='binary:logistic',
-            n_estimators=100,
-            max_depth=3,
-            learning_rate=0.1,
-            random_state=1,
+        RandomForestClassifier(
+            n_estimators=10,
+            max_depth=15,
+            min_samples_leaf=5,
+            random_state=42,
         ),
     )
     

@@ -1,5 +1,5 @@
 {
-    "model": "XGBoostClassifier",
+    "model": "RandomForestClassifier",
     "target": "diabetes",
     "features": {
         "numerical": [
@@ -16,21 +16,31 @@
         ]
     },
     "dataset": {
-        "filename": "diabetes_prediction_dataset_cleaned.csv",
-        "sha256": "6cac5019855c46d2f3b0e5121ae8c754d9715708266269b76b60dfe8400945a4",
-        "rows": 96128
+        "filename": "diabetes_prediction_dataset_cleaned_v2.csv",
+        "sha256": "ad632e12878fab91c6f2e5d33f952ecb793de5bedc41f44286ba72d436d97b27",
+        "rows": 96146
     },
     "split": {
-        "train": 57676,
-        "validation": 19226,
-        "test": 19226
+        "train": 57687,
+        "validation": 19229,
+        "test": 19230
     },
-    "test_metrics": {
-        "accuracy": 0.9720170602309373,
-        "precision": 0.9931856899488927,
-        "recall": 0.6875,
-        "f1_score": 0.8125435540069686,
-        "roc_auc": 0.9763179226447385
+    "val_metrics": {
+        "accuracy": 0.9710333350668261,
+        "precision": 0.9855072463768116,
+        "recall": 0.6816037735849056,
+        "f1_score": 0.8058556988497735,
+        "roc_auc": 0.9707698266288153,
+        "confusion_matrix": [
+            [
+                17516,
+                17
+            ],
+            [
+                540,
+                1156
+            ]
+        ]
     },
     "random_state": 42
 }
